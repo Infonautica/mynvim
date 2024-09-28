@@ -8,8 +8,7 @@ vim.cmd("set shiftwidth=2")
 require("config.lazy")
 
 -- Setup a theme
-require("catppuccin").setup()
-vim.cmd.colorscheme "catppuccin"
+require("config.colorscheme")
 
 -- Setup mappings for all of the plugins
 require("config.mappings")

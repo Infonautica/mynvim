@@ -7,3 +7,6 @@ vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Help tags' })
 
 -- Setup neo tree mappings
 vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>', { silent = true, noremap = true })
+
+vim.keymap.set('n', '<C-e>', '$')
+vim.keymap.set('v', '<C-e>', '$')
