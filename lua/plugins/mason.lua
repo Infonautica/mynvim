@@ -20,10 +20,18 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
+			local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
 			local lspconfig = require("lspconfig")
-			lspconfig.lua_ls.setup({})
-			lspconfig.volar.setup({})
+			lspconfig.lua_ls.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.volar.setup({
+				capabilities = capabilities,
+			})
 			lspconfig.ts_ls.setup({
+				capabilities = capabilities,
+
 				init_options = {
 					plugins = {
 						{
@@ -47,9 +55,9 @@ return {
 	},
 	{
 		"nvimtools/none-ls.nvim",
-    dependencies = {
-      "nvimtools/none-ls-extras.nvim",
-    },
+		dependencies = {
+			"nvimtools/none-ls-extras.nvim",
+		},
 		config = function()
 			local null_ls = require("null-ls")
 
@@ -58,9 +66,9 @@ return {
 					null_ls.builtins.formatting.stylua,
 					null_ls.builtins.completion.spell,
 
-          -- requires none-ls-extras.nvim
+					-- requires none-ls-extras.nvim
 					require("none-ls.diagnostics.eslint"),
-          require("none-ls.code_actions.eslint");
+					require("none-ls.code_actions.eslint"),
 				},
 			})
 		end,
