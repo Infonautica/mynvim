@@ -47,5 +47,24 @@ vim.keymap.set("n", "<C-S-Down>", ":resize -2<CR>")            -- Decrease heigh
 vim.keymap.set("n", "<z-Left>", ":normal 5zh")  -- Scroll left
 vim.keymap.set("n", "<z-Right>", ":normal 5zl") -- Scroll right
 
+-- Save buffer
+vim.keymap.set("n", "<leader>w", function()
+  vim.lsp.buf.format()
+  vim.cmd("w")
+end)
+
 -- Formatting and none-ls mappings
 vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, {})
+
+-- Git
+local gitsigns = require('gitsigns')
+vim.keymap.set("n", "<leader>hs", gitsigns.stage_hunk)
+vim.keymap.set("n", "<leader>gr", gitsigns.reset_hunk)
+vim.keymap.set("n", "<leader>gR", gitsigns.reset_buffer)
+vim.keymap.set("n", "<leader>gp", gitsigns.preview_hunk)
+vim.keymap.set("n", "<leader>gl", function()
+  gitsigns.blame_line({ full = true })
+end)
+vim.keymap.set("n", "<leader>gt", gitsigns.toggle_current_line_blame)
+-- map("n", "<leader>hd", gitsigns.diffthis)
+-- map("n", "<leader>hD", function() gitsigns.diffthis("~") end)

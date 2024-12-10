@@ -7,7 +7,7 @@ vim.g.mapleader = " "
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.clipboard = "unnamedplus"
-
+vim.o.cmdheight = 0
 
 -- Initiate Lazy package manager
 require("config.lazy")
