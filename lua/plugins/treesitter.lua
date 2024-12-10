@@ -7,12 +7,8 @@ return {
 			sync_install = true,
 			ensure_installed = { "lua", "javascript", "typescript", "vue" },
 			ignore_install = {},
-			modules = {
-				highlight = {
-					enable = true,
-					additional_vim_regex_highlighting = false,
-				},
-			},
+      highlight = { enable = true },
+      indent = { enable = true },
 		})
 	end,
 }

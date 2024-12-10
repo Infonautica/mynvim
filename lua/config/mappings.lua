@@ -1,47 +1,51 @@
 -- Setup telescope mappings
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Find files' })
-vim.keymap.set('n', '<leader>fw', builtin.live_grep, { desc = 'Find word' })
-vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Find buffers' })
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Help tags' })
+local builtin = require("telescope.builtin")
+vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find files" })
+vim.keymap.set("n", "<leader>fw", builtin.live_grep, { desc = "Find word" })
+vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Find buffers" })
+vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Help tags" })
 
 -- Setup neo tree mappings
-vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>', { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>", { silent = true, noremap = true })
 
-vim.keymap.set('n', '<C-e>', '$')
-vim.keymap.set('v', '<C-e>', '$')
+-- Jump to the end of line
+vim.keymap.set("n", "<C-e>", "$")
+vim.keymap.set("v", "<C-e>", "$")
 
 -- Disable shift based navigation to favor <C-u> and <C-d>
-vim.keymap.set('n', '<S-Up>', '<Nop>')
-vim.keymap.set('n', '<S-Down>', '<Nop>')
+vim.keymap.set("n", "<S-Up>", "<Nop>")
+vim.keymap.set("n", "<S-Down>", "<Nop>")
 
 -- Disable arrows navigation
-vim.keymap.set('n', '<Up>', '<Nop>')
-vim.keymap.set('n', '<Down>', '<Nop>')
-vim.keymap.set('n', '<Left>', '<Nop>')
-vim.keymap.set('n', '<Right>', '<Nop>')
+vim.keymap.set("n", "<Up>", "<Nop>")
+vim.keymap.set("n", "<Down>", "<Nop>")
+vim.keymap.set("n", "<Left>", "<Nop>")
+vim.keymap.set("n", "<Right>", "<Nop>")
 
-vim.keymap.set('n', '<C-u>', '10k')
-vim.keymap.set('n', '<C-d>', '10j')
+vim.keymap.set("n", "<C-u>", "10k")
+vim.keymap.set("n", "<C-d>", "10j")
 
 -- Navigate splits
-vim.keymap.set('n', '<Tab>', ':wincmd w<CR>') -- Switch to the next window
-vim.keymap.set('n', '<C-Left>', '<C-W>h')
-vim.keymap.set('n', '<C-Right>', '<C-W>l')
-vim.keymap.set('n', '<C-Up>', '<C-W>k')
-vim.keymap.set('n', '<C-Down>', '<C-W>j')
+vim.keymap.set("n", "<Tab>", ":wincmd w<CR>") -- Switch to the next window
+vim.keymap.set("n", "<C-Left>", "<C-W>h")
+vim.keymap.set("n", "<C-Right>", "<C-W>l")
+vim.keymap.set("n", "<C-Up>", "<C-W>k")
+vim.keymap.set("n", "<C-Down>", "<C-W>j")
 
 -- Create splits
-vim.keymap.set('n', '\\', '<Nop>')
-vim.keymap.set('n', '\\\\', ':vsplit<CR>')
-vim.keymap.set('n', '--', '<cmd>split<CR>')
+vim.keymap.set("n", "\\", "<Nop>")
+vim.keymap.set("n", "\\\\", ":vsplit<CR>")
+vim.keymap.set("n", "--", "<cmd>split<CR>")
 
 -- Resize splits
-vim.keymap.set('n', '<C-S-Left>', ':vertical :resize -2<CR>') -- Increase width of the split
-vim.keymap.set('n', '<C-S-Right>', ':vertical :resize +2<CR>') -- Decrease width of the split
-vim.keymap.set('n', '<C-S-Up>', ':resize +2<CR>') -- Increase height of the split
-vim.keymap.set('n', '<C-S-Down>', ':resize -2<CR>') -- Decrease height of the split
+vim.keymap.set("n", "<C-S-Left>", ":vertical :resize -2<CR>")  -- Increase width of the split
+vim.keymap.set("n", "<C-S-Right>", ":vertical :resize +2<CR>") -- Decrease width of the split
+vim.keymap.set("n", "<C-S-Up>", ":resize +2<CR>")              -- Increase height of the split
+vim.keymap.set("n", "<C-S-Down>", ":resize -2<CR>")            -- Decrease height of the split
 
 -- Horizontal scroll
-vim.keymap.set('n', '<z-Left>', ':normal 5zh') -- Scroll left
-vim.keymap.set('n', '<z-Right>', ':normal 5zl') -- Scroll right
+vim.keymap.set("n", "<z-Left>", ":normal 5zh")  -- Scroll left
+vim.keymap.set("n", "<z-Right>", ":normal 5zl") -- Scroll right
+
+-- Formatting and none-ls mappings
+vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, {})
