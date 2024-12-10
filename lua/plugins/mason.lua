@@ -28,7 +28,7 @@ return {
 					plugins = {
 						{
 							name = "@vue/typescript-plugin",
-							location = "/Users/leoniddanilov/.nodenv/versions/20.17.0/lib/node_modules/@vue/typescript-plugin",
+							location = "/Users/leoniddanilov/.nvm/versions/node/v20.18.0/lib/node_modules/@vue/typescript-plugin",
 							languages = { "javascript", "typescript", "vue" },
 						},
 					},

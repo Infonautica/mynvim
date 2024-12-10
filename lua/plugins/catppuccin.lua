@@ -5,7 +5,7 @@ return {
 	config = function()
 		local theme = require("catppuccin")
 		theme.setup({
-			treesitter = false,
+			treesitter = true,
 			integrations = {
 				alpha = true,
 				aerial = true,
