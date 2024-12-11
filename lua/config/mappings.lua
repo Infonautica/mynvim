@@ -1,9 +1,10 @@
 -- Setup telescope mappings
-local builtin = require("telescope.builtin")
-vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find files" })
-vim.keymap.set("n", "<leader>fw", builtin.live_grep, { desc = "Find word" })
-vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Find buffers" })
-vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Help tags" })
+local telescope = require("telescope.builtin")
+vim.keymap.set("n", "<leader>ff", telescope.find_files, { desc = "Find files" })
+vim.keymap.set("n", "<leader>fw", telescope.live_grep, { desc = "Find word" })
+vim.keymap.set("n", "<leader>fb", telescope.buffers, { desc = "Find buffers" })
+vim.keymap.set("n", "<leader>fh", telescope.help_tags, { desc = "Help tags" })
+vim.keymap.set("n", "<leader>fc", ":Telescope commands<CR>", { desc = "Commands" })
 
 -- Setup neo tree mappings
 vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>", { silent = true, noremap = true })
@@ -38,19 +39,19 @@ vim.keymap.set("n", "\\\\", ":vsplit<CR>")
 vim.keymap.set("n", "--", "<cmd>split<CR>")
 
 -- Resize splits
-vim.keymap.set("n", "<C-S-Left>", ":vertical :resize -2<CR>")  -- Increase width of the split
+vim.keymap.set("n", "<C-S-Left>", ":vertical :resize -2<CR>") -- Increase width of the split
 vim.keymap.set("n", "<C-S-Right>", ":vertical :resize +2<CR>") -- Decrease width of the split
-vim.keymap.set("n", "<C-S-Up>", ":resize +2<CR>")              -- Increase height of the split
-vim.keymap.set("n", "<C-S-Down>", ":resize -2<CR>")            -- Decrease height of the split
+vim.keymap.set("n", "<C-S-Up>", ":resize +2<CR>") -- Increase height of the split
+vim.keymap.set("n", "<C-S-Down>", ":resize -2<CR>") -- Decrease height of the split
 
 -- Horizontal scroll
-vim.keymap.set("n", "<z-Left>", ":normal 5zh")  -- Scroll left
+vim.keymap.set("n", "<z-Left>", ":normal 5zh") -- Scroll left
 vim.keymap.set("n", "<z-Right>", ":normal 5zl") -- Scroll right
 
 -- Save buffer
 vim.keymap.set("n", "<leader>w", function()
-  vim.lsp.buf.format()
-  vim.cmd("w")
+	vim.lsp.buf.format()
+	vim.cmd("w")
 end)
 
 -- Formatting and none-ls mappings
@@ -62,7 +63,7 @@ vim.keymap.set("n", "<leader>gr", gitsigns.reset_hunk)
 vim.keymap.set("n", "<leader>gR", gitsigns.reset_buffer)
 vim.keymap.set("n", "<leader>gp", gitsigns.preview_hunk)
 vim.keymap.set("n", "<leader>gl", function()
-  gitsigns.blame_line({ full = true })
+	gitsigns.blame_line({ full = true })
 end)
 vim.keymap.set("n", "<leader>gt", gitsigns.toggle_current_line_blame)
 -- map("n", "<leader>hd", gitsigns.diffthis)
@@ -71,3 +72,8 @@ vim.keymap.set("n", "<leader>gt", gitsigns.toggle_current_line_blame)
 -- Neotree
 vim.keymap.set("n", "<leader>e", "<Cmd>Neotree toggle<CR>", {})
 -- vim.keymap.set("n", "<leader>bf", ":Neotree buffers reveal float<CR>", {})
+
+-- Copilot
+vim.keymap.set("i", "<F1>", 'copilot#Accept("<CR>")', { silent = true, expr = true, replace_keycodes = false })
+vim.keymap.set("i", "<F2>", "copilot#Next()", { silent = true, expr = true })
+vim.keymap.set("i", "<F3>", "copilot#Previous()", { silent = true, expr = true })
