@@ -39,39 +39,39 @@ vim.keymap.set("n", "\\\\", ":vsplit<CR>")
 vim.keymap.set("n", "--", "<cmd>split<CR>")
 
 -- Resize splits
-vim.keymap.set("n", "<C-S-Left>", ":vertical :resize -2<CR>")  -- Increase width of the split
+vim.keymap.set("n", "<C-S-Left>", ":vertical :resize -2<CR>") -- Increase width of the split
 vim.keymap.set("n", "<C-S-Right>", ":vertical :resize +2<CR>") -- Decrease width of the split
-vim.keymap.set("n", "<C-S-Up>", ":resize +2<CR>")              -- Increase height of the split
-vim.keymap.set("n", "<C-S-Down>", ":resize -2<CR>")            -- Decrease height of the split
+vim.keymap.set("n", "<C-S-Up>", ":resize +2<CR>") -- Increase height of the split
+vim.keymap.set("n", "<C-S-Down>", ":resize -2<CR>") -- Decrease height of the split
 
 -- Horizontal scroll
-vim.keymap.set("n", "<z-Left>", ":normal 5zh")  -- Scroll left
+vim.keymap.set("n", "<z-Left>", ":normal 5zh") -- Scroll left
 vim.keymap.set("n", "<z-Right>", ":normal 5zl") -- Scroll right
 
 -- Save buffer
 vim.keymap.set("n", "<leader>w", function()
-  vim.lsp.buf.format({
-    filter = function(client)
-      -- Ignoring formatting
-      if client.name == "ts_ls" then
-        return false
-      end
+	vim.lsp.buf.format({
+		filter = function(client)
+			-- Ignoring formatting
+			if client.name == "ts_ls" then
+				return false
+			end
 
-      -- Ignoring formatting
-      if client.name == "volar" then
-        return false
-      end
+			-- Ignoring formatting
+			if client.name == "volar" then
+				return false
+			end
 
-      -- Ignoring formatting
-      if client.name == "lua_ls" then
-        return false
-      end
+			-- Ignoring formatting
+			if client.name == "lua_ls" then
+				return false
+			end
 
-      return true
-    end,
-  })
+			return true
+		end,
+	})
 
-  vim.cmd("w")
+	vim.cmd("w")
 end)
 
 -- Formatting and none-ls mappings
@@ -83,7 +83,7 @@ vim.keymap.set("n", "<leader>gr", gitsigns.reset_hunk)
 vim.keymap.set("n", "<leader>gR", gitsigns.reset_buffer)
 vim.keymap.set("n", "<leader>gp", gitsigns.preview_hunk)
 vim.keymap.set("n", "<leader>gl", function()
-  gitsigns.blame_line({ full = true })
+	gitsigns.blame_line({ full = true })
 end)
 vim.keymap.set("n", "<leader>gt", gitsigns.toggle_current_line_blame)
 -- map("n", "<leader>hd", gitsigns.diffthis)
@@ -102,3 +102,10 @@ vim.keymap.set("i", "<F3>", "copilot#Previous()", { silent = true, expr = true }
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {})
 vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, {})
+-- vim.keymap.set("n", "grr", vim.lsp.buf.references, { noremap = true, silent = true })
+vim.keymap.set("n", "gra", vim.lsp.buf.code_action, { noremap = true, silent = true })
+vim.keymap.set("n", "grn", vim.lsp.buf.rename, { noremap = true, silent = true })
+
+vim.keymap.set("n", "grr", function()
+	telescope.lsp_references()
+end, { noremap = true, silent = true })
