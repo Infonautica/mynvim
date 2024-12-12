@@ -52,13 +52,18 @@ vim.keymap.set("n", "<z-Right>", ":normal 5zl") -- Scroll right
 vim.keymap.set("n", "<leader>w", function()
   vim.lsp.buf.format({
     filter = function(client)
-      -- Ignoring ts_ls formatting
-      if (client.name == "ts_ls") then
+      -- Ignoring formatting
+      if client.name == "ts_ls" then
         return false
       end
 
-      -- Ignoring volar formatting
-      if (client.name == "volar") then
+      -- Ignoring formatting
+      if client.name == "volar" then
+        return false
+      end
+
+      -- Ignoring formatting
+      if client.name == "lua_ls" then
         return false
       end
 
@@ -97,4 +102,3 @@ vim.keymap.set("i", "<F3>", "copilot#Previous()", { silent = true, expr = true }
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {})
 vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, {})
-
