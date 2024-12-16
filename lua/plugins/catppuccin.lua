@@ -5,6 +5,12 @@ return {
 	config = function()
 		local theme = require("catppuccin")
 		theme.setup({
+			transparent_background = true,
+			term_colors = false,
+			background = {
+				light = "latte",
+				dark = "mocha",
+			},
 			treesitter = true,
 			integrations = {
 				alpha = true,
@@ -20,6 +26,6 @@ return {
 				which_key = true,
 			},
 		})
-		vim.cmd.colorscheme("catppuccin")
+		vim.cmd.colorscheme("catppuccin-mocha")
 	end,
 }
