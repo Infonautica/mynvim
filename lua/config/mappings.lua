@@ -102,10 +102,12 @@ vim.keymap.set("i", "<F3>", "copilot#Previous()", { silent = true, expr = true }
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {})
 vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, {})
--- vim.keymap.set("n", "grr", vim.lsp.buf.references, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>ld", vim.diagnostic.open_float, {})
+vim.keymap.set("n", "<leader>lD", ":Telescope diagnostics bufnr=0 <CR>", {})
 vim.keymap.set("n", "gra", vim.lsp.buf.code_action, { noremap = true, silent = true })
 vim.keymap.set("n", "grn", vim.lsp.buf.rename, { noremap = true, silent = true })
 
+-- vim.keymap.set("n", "grr", vim.lsp.buf.references, { noremap = true, silent = true })
 vim.keymap.set("n", "grr", function()
 	telescope.lsp_references()
 end, { noremap = true, silent = true })
