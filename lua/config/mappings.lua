@@ -35,8 +35,8 @@ vim.keymap.set("n", "<C-Down>", "<C-W>j")
 
 -- Create splits
 vim.keymap.set("n", "\\", "<Nop>")
-vim.keymap.set("n", "\\\\", ":vsplit<CR>")
-vim.keymap.set("n", "--", "<cmd>split<CR>")
+vim.keymap.set("n", "\\\\", ":vsplit<CR>", { desc = "Vertical split" })
+vim.keymap.set("n", "--", "<cmd>split<CR>", { desc = "Horizontal split" })
 
 -- Resize splits
 vim.keymap.set("n", "<C-S-Left>", ":vertical :resize -2<CR>") -- Increase width of the split
@@ -72,10 +72,10 @@ vim.keymap.set("n", "<leader>w", function()
 	})
 
 	vim.cmd("w")
-end)
+end, { desc = "Save buffer" })
 
 -- Formatting and none-ls mappings
-vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, {})
+vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, { desc = "Format Buffer" })
 
 -- Git
 local gitsigns = require("gitsigns")
@@ -90,7 +90,7 @@ vim.keymap.set("n", "<leader>gt", gitsigns.toggle_current_line_blame, { desc = "
 -- map("n", "<leader>hD", function() gitsigns.diffthis("~") end)
 
 -- Neotree
-vim.keymap.set("n", "<leader>e", "<Cmd>Neotree toggle<CR>", {})
+vim.keymap.set("n", "<leader>e", "<Cmd>Neotree toggle<CR>", { desc = "Toggle Neotree" })
 -- vim.keymap.set("n", "<leader>bf", ":Neotree buffers reveal float<CR>", {})
 
 -- Copilot
