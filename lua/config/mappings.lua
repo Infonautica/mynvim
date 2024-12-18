@@ -8,6 +8,8 @@ vim.keymap.set("n", "<leader>fc", ":Telescope commands<CR>", { desc = "Commands"
 
 -- Setup neo tree mappings
 vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>", { silent = true, noremap = true })
+-- Focus on the neo tree
+vim.keymap.set("n", "<leader>o", ":Neotree reveal<CR>", { silent = true, noremap = true })
 
 -- Jump to the end of line
 vim.keymap.set("n", "<C-e>", "$")
