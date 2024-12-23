@@ -101,7 +101,7 @@ vim.keymap.set("i", "<F2>", "copilot#Next()", { silent = true, expr = true })
 vim.keymap.set("i", "<F3>", "copilot#Previous()", { silent = true, expr = true })
 
 -- LSP
-vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go To Definition" })
+vim.keymap.set("n", "gd", telescope.lsp_definitions, { desc = "Go To Definition" })
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go To Implementation" })
 vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { desc = "Code actions" })
 vim.keymap.set("n", "<leader>ld", vim.diagnostic.open_float, { desc = "Line diagnostics" })
