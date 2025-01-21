@@ -100,6 +100,15 @@ vim.keymap.set("i", "<F1>", 'copilot#Accept("<CR>")', { silent = true, expr = tr
 vim.keymap.set("i", "<F2>", "copilot#Next()", { silent = true, expr = true })
 vim.keymap.set("i", "<F3>", "copilot#Previous()", { silent = true, expr = true })
 
+-- Copilot Chat
+vim.keymap.set("n", "<leader>co", ":CopilotChatOpen<CR>", { desc = "Copilot Chat Open" })
+vim.keymap.set("n", "<leader>cg", function()
+	local input = vim.fn.input("Quick Chat: ")
+	if input ~= "" then
+		require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
+	end
+end, { desc = "Copilot Quick Chat" })
+
 -- LSP
 vim.keymap.set("n", "gd", telescope.lsp_definitions, { desc = "Go To Definition" })
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go To Implementation" })

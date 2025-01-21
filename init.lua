@@ -8,6 +8,7 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.clipboard = "unnamedplus"
 vim.opt.cmdheight = 0
+vim.opt.completeopt = "menu,menuone,noselect,noinsert"
 
 -- Initiate Lazy package manager
 require("config.lazy")
