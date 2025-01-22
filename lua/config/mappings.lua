@@ -108,6 +108,7 @@ vim.keymap.set("n", "<leader>cg", function()
 		require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
 	end
 end, { desc = "Copilot Quick Chat" })
+vim.keymap.set("n", "<leader>cr", ":CopilotChatReview<CR>", { desc = "Copilot Review Buffer" })
 
 -- LSP
 vim.keymap.set("n", "gd", telescope.lsp_definitions, { desc = "Go To Definition" })

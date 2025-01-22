@@ -19,8 +19,8 @@ return {
 			context = "buffers",
 			mappings = {
 				accept_diff = {
-					normal = "<C-CR>",
-					insert = "<C-CR>",
+					normal = "<C-y>",
+					insert = "<C-y>",
 				},
 				close = {
 					normal = "<C-q>",
