@@ -47,6 +47,7 @@ return {
 					"javascript",
 					"typescript",
 					"vue",
+					"typescriptreact",
 				},
 			})
 		end,
