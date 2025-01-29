@@ -14,7 +14,6 @@ return {
 				relative = "cursor",
 				title = "Claude Chat",
 				width = 0.42,
-				-- layout = "float",
 			},
 			context = "buffers",
 			mappings = {
