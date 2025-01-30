@@ -5,7 +5,8 @@ vim.keymap.set("n", "<leader>fw", telescope.live_grep, { desc = "Find word" })
 vim.keymap.set("n", "<leader>fb", telescope.buffers, { desc = "Find buffers" })
 vim.keymap.set("n", "<leader>fh", telescope.help_tags, { desc = "Help tags" })
 vim.keymap.set("n", "<leader>fs", telescope.git_status, { desc = "Git Changes" })
-vim.keymap.set("n", "<leader>fc", ":Telescope commands<CR>", { desc = "Commands" })
+vim.keymap.set("n", "<leader>fc", telescope.commands, { desc = "Commands" })
+vim.keymap.set("n", "<leader>fr", telescope.resume, { desc = "Resume Search" })
 
 -- Setup neo tree mappings
 vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>", { silent = true, noremap = true })
