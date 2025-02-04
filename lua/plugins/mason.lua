@@ -29,6 +29,25 @@ return {
 			lspconfig.volar.setup({
 				capabilities = capabilities,
 			})
+			lspconfig.helm_ls.setup({
+				-- capabilities = capabilities,
+				settings = {
+					["helm-ls"] = {
+						yamlls = {
+							enabled = true,
+							path = "yaml-language-server",
+						},
+					},
+				},
+			})
+			lspconfig.yamlls.setup({
+				on_attach = function(client, bufnr)
+					if client.config.name == "yamlls" and vim.bo.filetype == "helm" then
+						vim.lsp.buf_detach_client(bufnr, client.id)
+					end
+				end,
+			})
+
 			lspconfig.eslint.setup({})
 
 			lspconfig.ts_ls.setup({

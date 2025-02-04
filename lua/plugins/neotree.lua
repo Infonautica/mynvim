@@ -17,7 +17,7 @@ return {
 			},
 			filesystem = {
 				filtered_items = {
-          visible = true,
+					visible = true,
 					hide_dotfiles = false,
 					always_show_by_pattern = {
 						".env*",
