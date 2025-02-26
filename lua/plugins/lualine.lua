@@ -1,7 +1,3 @@
-local function filepath()
-	return vim.fn.expand("%:p")
-end
-
 return {
 	"nvim-lualine/lualine.nvim",
 	config = function()
@@ -10,7 +6,12 @@ return {
 				theme = "dracula",
 			},
 			sections = {
-				lualine_c = { filepath },
+				lualine_c = {
+					{
+						"filename",
+						path = 1,
+					},
+				},
 				lualine_x = {},
 				lualine_y = {},
 			},

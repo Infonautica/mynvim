@@ -9,13 +9,14 @@ return {
 		opts = {
 			model = "claude-3.5-sonnet",
 			headless = false,
+			auto_insert_mode = true,
 			window = {
 				border = "single",
 				relative = "cursor",
 				title = "Claude Chat",
 				width = 0.42,
 			},
-			context = "buffers",
+			context = "buffer",
 			mappings = {
 				accept_diff = {
 					normal = "<C-y>",
