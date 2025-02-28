@@ -13,7 +13,7 @@ return {
 					},
 				},
 				lualine_x = {},
-				lualine_y = {},
+				lualine_y = { "filetype" },
 			},
 		})
 	end,

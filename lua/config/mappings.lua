@@ -43,40 +43,39 @@ vim.keymap.set("n", "\\\\", ":vsplit<CR>", { desc = "Vertical split" })
 vim.keymap.set("n", "--", "<cmd>split<CR>", { desc = "Horizontal split" })
 
 -- Resize splits
-vim.keymap.set("n", "<C-S-Left>", ":vertical :resize -2<CR>") -- Increase width of the split
+vim.keymap.set("n", "<C-S-Left>", ":vertical :resize -2<CR>")  -- Increase width of the split
 vim.keymap.set("n", "<C-S-Right>", ":vertical :resize +2<CR>") -- Decrease width of the split
-vim.keymap.set("n", "<C-S-Up>", ":resize +2<CR>") -- Increase height of the split
-vim.keymap.set("n", "<C-S-Down>", ":resize -2<CR>") -- Decrease height of the split
+vim.keymap.set("n", "<C-S-Up>", ":resize +2<CR>")              -- Increase height of the split
+vim.keymap.set("n", "<C-S-Down>", ":resize -2<CR>")            -- Decrease height of the split
 
 -- Horizontal scroll
-vim.keymap.set("n", "<z-Left>", ":normal 5zh") -- Scroll left
+vim.keymap.set("n", "<z-Left>", ":normal 5zh")  -- Scroll left
 vim.keymap.set("n", "<z-Right>", ":normal 5zl") -- Scroll right
 
 -- Save buffer
-vim.keymap.set("n", "<leader>w", function()
-	vim.lsp.buf.format({
-		filter = function(client)
-			-- Ignoring formatting
-			if client.name == "ts_ls" then
-				return false
-			end
+vim.api.nvim_create_autocmd("BufWritePre", {
+  callback = function()
+    vim.lsp.buf.format({
+      filter = function(client)
+        local use_client = {
+          ["ts_ls"] = false,
+          ["volar"] = false,
+          ["lua_ls"] = false,
+        }
 
-			-- Ignoring formatting
-			if client.name == "volar" then
-				return false
-			end
+        local filetype = vim.api.nvim_buf_get_option(0, "filetype")
+        if filetype == "lua" and client.name == "lua_ls" then
+          return true
+        end
 
-			-- Ignoring formatting
-			if client.name == "lua_ls" then
-				return false
-			end
+        return use_client[client.name]
+      end,
+    })
+  end,
+})
 
-			return true
-		end,
-	})
-
-	vim.cmd("w")
-end, { desc = "Save buffer" })
+-- Keep just the basic save mapping
+vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "Save buffer" })
 
 -- Formatting and none-ls mappings
 vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, { desc = "Format Buffer" })
@@ -87,7 +86,7 @@ vim.keymap.set("n", "<leader>gr", gitsigns.reset_hunk, { desc = "Reset Hunk" })
 vim.keymap.set("n", "<leader>gR", gitsigns.reset_buffer, { desc = "Reset Buffer" })
 vim.keymap.set("n", "<leader>gp", gitsigns.preview_hunk, { desc = "Preview Hunk" })
 vim.keymap.set("n", "<leader>gl", function()
-	gitsigns.blame_line({ full = true })
+  gitsigns.blame_line({ full = true })
 end, { desc = "Git Blame Line" })
 vim.keymap.set("n", "<leader>gt", gitsigns.toggle_current_line_blame, { desc = "Toggle Line Git Blame" })
 -- map("n", "<leader>hd", gitsigns.diffthis)
@@ -104,21 +103,22 @@ vim.keymap.set("i", "<F3>", "copilot#Previous()", { silent = true, expr = true }
 
 -- Copilot Chat
 local function quick_chat()
-	local copilot_chat = require("CopilotChat")
-	local copilot_chat_select = require("CopilotChat.select")
+  local copilot_chat = require("CopilotChat")
+  local copilot_chat_select = require("CopilotChat.select")
 
-	local input = vim.fn.input("Quick Chat: ")
-	if input ~= "" then
-		copilot_chat.ask(input, {
-			selection = copilot_chat_select.visual,
-		})
-	end
+  local input = vim.fn.input("Quick Chat: ")
+  if input ~= "" then
+    copilot_chat.ask(input, {
+      selection = copilot_chat_select.visual,
+    })
+  end
 end
 vim.keymap.set("n", "<leader>co", ":CopilotChatOpen<CR>", { desc = "Copilot Chat Open" })
 vim.keymap.set("n", "<leader>cg", quick_chat, { desc = "Copilot Quick Chat" })
 vim.keymap.set("v", "<leader>cg", quick_chat, { desc = "Copilot Quick Chat" })
 
 vim.keymap.set("n", "<leader>cr", ":CopilotChatReview<CR>", { desc = "Copilot Review Buffer" })
+vim.keymap.set("n", "<leader>cc", ":CopilotChatReset<CR>", { desc = "Copilot Clear Chat" })
 
 -- LSP
 vim.keymap.set("n", "gd", telescope.lsp_definitions, { desc = "Go To Definition" })
