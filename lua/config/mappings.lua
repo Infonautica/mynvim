@@ -61,6 +61,9 @@ vim.api.nvim_create_autocmd("BufWritePre", {
           ["ts_ls"] = false,
           ["volar"] = false,
           ["lua_ls"] = false,
+          ["eslint"] = false,
+          ["prettier"] = false,
+          ["null-ls"] = true,
         }
 
         local filetype = vim.api.nvim_buf_get_option(0, "filetype")
