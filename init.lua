@@ -11,6 +11,14 @@ vim.opt.cmdheight = 1
 vim.opt.completeopt = "menu,menuone,noselect,noinsert"
 vim.opt.splitright = true
 
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+  border = "single", -- Options: "single", "double", "rounded", "shadow"
+})
+
+vim.diagnostic.config({
+  float = { border = "single" }, -- Options: "single", "double", "rounded", "shadow"
+})
+
 -- Initiate Lazy package manager
 require("config.lazy")
 
