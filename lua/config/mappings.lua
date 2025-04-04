@@ -1,11 +1,23 @@
 -- Setup telescope mappings
 local telescope = require("telescope.builtin")
-vim.keymap.set("n", "<leader>ff", telescope.find_files, { desc = "Find files" })
-vim.keymap.set("n", "<leader>fw", telescope.live_grep, { desc = "Find word" })
+local telescope_themes = require("telescope.themes")
+local callTelescope = function(telescope_method)
+	telescope_method(telescope_themes.get_dropdown({}))
+end
+vim.keymap.set("n", "<leader>ff", function()
+	callTelescope(telescope.find_files)
+end, { desc = "Find files" })
+vim.keymap.set("n", "<leader>fw", function()
+	callTelescope(telescope.live_grep)
+end, { desc = "Find word" })
 vim.keymap.set("n", "<leader>fb", telescope.buffers, { desc = "Find buffers" })
 vim.keymap.set("n", "<leader>fh", telescope.help_tags, { desc = "Help tags" })
-vim.keymap.set("n", "<leader>fs", telescope.git_status, { desc = "Git Changes" })
-vim.keymap.set("n", "<leader>fc", telescope.commands, { desc = "Commands" })
+vim.keymap.set("n", "<leader>fs", function()
+	callTelescope(telescope.git_status)
+end, { desc = "Git Changes" })
+vim.keymap.set("n", "<leader>fc", function()
+	callTelescope(telescope.commands)
+end, { desc = "Commands" })
 vim.keymap.set("n", "<leader>fr", telescope.resume, { desc = "Resume Search" })
 
 -- Setup neo tree mappings
@@ -43,38 +55,38 @@ vim.keymap.set("n", "\\\\", ":vsplit<CR>", { desc = "Vertical split" })
 vim.keymap.set("n", "--", "<cmd>split<CR>", { desc = "Horizontal split" })
 
 -- Resize splits
-vim.keymap.set("n", "<C-S-Left>", ":vertical :resize -2<CR>")  -- Increase width of the split
+vim.keymap.set("n", "<C-S-Left>", ":vertical :resize -2<CR>") -- Increase width of the split
 vim.keymap.set("n", "<C-S-Right>", ":vertical :resize +2<CR>") -- Decrease width of the split
-vim.keymap.set("n", "<C-S-Up>", ":resize +2<CR>")              -- Increase height of the split
-vim.keymap.set("n", "<C-S-Down>", ":resize -2<CR>")            -- Decrease height of the split
+vim.keymap.set("n", "<C-S-Up>", ":resize +2<CR>") -- Increase height of the split
+vim.keymap.set("n", "<C-S-Down>", ":resize -2<CR>") -- Decrease height of the split
 
 -- Horizontal scroll
-vim.keymap.set("n", "<z-Left>", ":normal 5zh")  -- Scroll left
+vim.keymap.set("n", "<z-Left>", ":normal 5zh") -- Scroll left
 vim.keymap.set("n", "<z-Right>", ":normal 5zl") -- Scroll right
 
 -- Save buffer
 vim.api.nvim_create_autocmd("BufWritePre", {
-  callback = function()
-    vim.lsp.buf.format({
-      filter = function(client)
-        local use_client = {
-          ["ts_ls"] = false,
-          ["volar"] = false,
-          ["lua_ls"] = false,
-          ["eslint"] = false,
-          ["prettier"] = false,
-          ["null-ls"] = true,
-        }
+	callback = function()
+		vim.lsp.buf.format({
+			filter = function(client)
+				local use_client = {
+					["ts_ls"] = false,
+					["volar"] = false,
+					["lua_ls"] = false,
+					["eslint"] = false,
+					["prettier"] = false,
+					["null-ls"] = true,
+				}
 
-        local filetype = vim.api.nvim_buf_get_option(0, "filetype")
-        if filetype == "lua" and client.name == "lua_ls" then
-          return true
-        end
+				local filetype = vim.api.nvim_buf_get_option(0, "filetype")
+				if filetype == "lua" and client.name == "lua_ls" then
+					return true
+				end
 
-        return use_client[client.name]
-      end,
-    })
-  end,
+				return use_client[client.name]
+			end,
+		})
+	end,
 })
 
 -- Keep just the basic save mapping
@@ -89,7 +101,7 @@ vim.keymap.set("n", "<leader>gr", gitsigns.reset_hunk, { desc = "Reset Hunk" })
 vim.keymap.set("n", "<leader>gR", gitsigns.reset_buffer, { desc = "Reset Buffer" })
 vim.keymap.set("n", "<leader>gp", gitsigns.preview_hunk, { desc = "Preview Hunk" })
 vim.keymap.set("n", "<leader>gl", function()
-  gitsigns.blame_line({ full = true })
+	gitsigns.blame_line({ full = true })
 end, { desc = "Git Blame Line" })
 vim.keymap.set("n", "<leader>gt", gitsigns.toggle_current_line_blame, { desc = "Toggle Line Git Blame" })
 -- map("n", "<leader>hd", gitsigns.diffthis)
@@ -106,15 +118,15 @@ vim.keymap.set("i", "<F3>", "copilot#Previous()", { silent = true, expr = true }
 
 -- Copilot Chat
 local function quick_chat()
-  local copilot_chat = require("CopilotChat")
-  local copilot_chat_select = require("CopilotChat.select")
+	local copilot_chat = require("CopilotChat")
+	local copilot_chat_select = require("CopilotChat.select")
 
-  local input = vim.fn.input("Quick Chat: ")
-  if input ~= "" then
-    copilot_chat.ask(input, {
-      selection = copilot_chat_select.visual,
-    })
-  end
+	local input = vim.fn.input("Quick Chat: ")
+	if input ~= "" then
+		copilot_chat.ask(input, {
+			selection = copilot_chat_select.visual,
+		})
+	end
 end
 vim.keymap.set("n", "<leader>co", ":CopilotChatOpen<CR>", { desc = "Copilot Chat Open" })
 vim.keymap.set("n", "<leader>cg", quick_chat, { desc = "Copilot Quick Chat" })
