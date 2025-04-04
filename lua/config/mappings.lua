@@ -2,7 +2,17 @@
 local telescope = require("telescope.builtin")
 local telescope_themes = require("telescope.themes")
 local callTelescope = function(telescope_method)
-	telescope_method(telescope_themes.get_dropdown({}))
+	telescope_method(telescope_themes.get_dropdown({
+		layout_config = {
+			width = function(_, max_columns, _)
+				return math.min(max_columns - 20, 150)
+			end,
+
+			height = function(_, _, max_lines)
+				return math.min(max_lines, 20)
+			end,
+		},
+	}))
 end
 vim.keymap.set("n", "<leader>ff", function()
 	callTelescope(telescope.find_files)
@@ -136,7 +146,9 @@ vim.keymap.set("n", "<leader>cr", ":CopilotChatReview<CR>", { desc = "Copilot Re
 vim.keymap.set("n", "<leader>cc", ":CopilotChatReset<CR>", { desc = "Copilot Clear Chat" })
 
 -- LSP
-vim.keymap.set("n", "gd", telescope.lsp_definitions, { desc = "Go To Definition" })
+vim.keymap.set("n", "gd", function()
+	callTelescope(telescope.lsp_definitions)
+end, { desc = "Go To Definition" })
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go To Implementation" })
 vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { desc = "Code actions" })
 vim.keymap.set("n", "<leader>ld", vim.diagnostic.open_float, { desc = "Line diagnostics" })
@@ -145,4 +157,6 @@ vim.keymap.set("n", "gra", vim.lsp.buf.code_action, { desc = "Code Actions", nor
 vim.keymap.set("n", "grn", vim.lsp.buf.rename, { desc = "Rename", noremap = true, silent = true })
 
 -- vim.keymap.set("n", "grr", vim.lsp.buf.references, { noremap = true, silent = true })
-vim.keymap.set("n", "grr", telescope.lsp_references, { desc = "List References", noremap = true, silent = true })
+vim.keymap.set("n", "grr", function()
+	callTelescope(telescope.lsp_references)
+end, { desc = "List References", noremap = true, silent = true })
