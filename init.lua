@@ -13,6 +13,7 @@ vim.opt.splitright = true
 vim.opt.wrap = true         -- Enable line wrapping
 vim.opt.linebreak = true    -- Break lines at word boundaries
 vim.opt.breakindent = false -- Preserve indentation in wrapped lines
+vim.opt.swapfile = false
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
   border = "single", -- Options: "single", "double", "rounded", "shadow"
