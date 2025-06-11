@@ -79,19 +79,19 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	callback = function()
 		vim.lsp.buf.format({
 			filter = function(client)
+				local filetype = vim.api.nvim_buf_get_option(0, "filetype")
+				if filetype == "lua" and client.name == "lua_ls" then
+					return true
+				end
+
 				local use_client = {
 					["ts_ls"] = false,
-					["volar"] = false,
+					["vue_ls"] = false,
 					["lua_ls"] = false,
 					["eslint"] = false,
 					["prettier"] = false,
 					["null-ls"] = true,
 				}
-
-				local filetype = vim.api.nvim_buf_get_option(0, "filetype")
-				if filetype == "lua" and client.name == "lua_ls" then
-					return true
-				end
 
 				return use_client[client.name]
 			end,
