@@ -5,7 +5,7 @@ return {
   config = function()
     local theme = require("catppuccin")
     theme.setup({
-      transparent_background = false,
+      transparent_background = true,
       term_colors = false,
       background = {
         light = "latte",

@@ -15,6 +15,11 @@ vim.opt.linebreak = true    -- Break lines at word boundaries
 vim.opt.breakindent = false -- Preserve indentation in wrapped lines
 vim.opt.swapfile = false
 vim.opt.winborder = 'single'
+vim.opt.autoread = true
+
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
+  command = "checktime",
+})
 
 -- Initiate Lazy package manager
 require("config.lazy")
